@@ -1,0 +1,12 @@
+{
+  "name": "Olline.design — архитектура и дизайн интерьеров",
+  "short_name": "Olline.design",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F6F2EB",
+  "theme_color": "#231E19",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
