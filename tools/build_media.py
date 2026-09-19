@@ -23,7 +23,8 @@ from PIL import Image
 
 Image.MAX_IMAGE_PIXELS = None
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC = os.path.join(ROOT, "Портфолио")
+SRC = next((os.path.join(ROOT, n) for n in ("Портфолио", "portfolio", "Portfolio")
+            if os.path.isdir(os.path.join(ROOT, n))), os.path.join(ROOT, "portfolio"))
 OUT = os.path.join(ROOT, "media")
 
 # folder name (without the leading number) -> (key, title shown on the site)
