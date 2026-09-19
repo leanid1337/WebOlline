@@ -1,6 +1,8 @@
 (() => {
 const root = document.documentElement;
-root.classList.add("js");
+
+
+root.classList.add("js", "anim");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const year = document.getElementById("year");
@@ -11,8 +13,13 @@ const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 1
 onScroll();
 window.addEventListener("scroll", onScroll, { passive: true });
 
+
+
 const art = document.querySelector(".art");
-requestAnimationFrame(() => requestAnimationFrame(() => art && art.classList.add("is-drawn")));
+const startDrawing = () => art && art.classList.add("is-drawn");
+requestAnimationFrame(() => requestAnimationFrame(startDrawing));
+setTimeout(startDrawing, 600);
+document.addEventListener("visibilitychange", startDrawing, { once: true });
 
 const items = document.querySelectorAll(".reveal");
 const groups = new Map();

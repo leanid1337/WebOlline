@@ -372,24 +372,24 @@ em { font-style: italic; color: var(--bronze); }
 .art [data-depth] { transition: transform 900ms var(--ease-out); }
 
 /* hero draw-in (runs once on load) */
-.js .art .line,
-.js .art .dim line { stroke-dasharray: 1; stroke-dashoffset: 1; }
-.js .art .shape { opacity: 0; }
-.js .art text,
-.js .art .guides { opacity: 0; }
+.anim .art .line,
+.anim .art .dim line { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.anim .art .shape { opacity: 0; }
+.anim .art text,
+.anim .art .guides { opacity: 0; }
 
-.js .art.is-drawn .guides { opacity: 1; transition: opacity 1200ms ease 100ms; }
-.js .art.is-drawn .line,
-.js .art.is-drawn .dim line {
+.anim .art.is-drawn .guides { opacity: 1; transition: opacity 1200ms ease 100ms; }
+.anim .art.is-drawn .line,
+.anim .art.is-drawn .dim line {
   stroke-dashoffset: 0;
   transition: stroke-dashoffset 1600ms var(--ease-in-out) 300ms;
 }
-.js .art.is-drawn .shape { opacity: 1; animation: rise 1100ms var(--ease-out) backwards; }
-.js .art.is-drawn .shape--sand   { animation-delay: 500ms; }
-.js .art.is-drawn .shape--oak    { animation-delay: 750ms; }
-.js .art.is-drawn .shape--bronze { animation-delay: 1000ms; }
-.js .art.is-drawn .shape--sage   { animation-delay: 1150ms; }
-.js .art.is-drawn text { opacity: 1; transition: opacity 800ms ease 1500ms; }
+.anim .art.is-drawn .shape { opacity: 1; animation: rise 1100ms var(--ease-out) backwards; }
+.anim .art.is-drawn .shape--sand   { animation-delay: 500ms; }
+.anim .art.is-drawn .shape--oak    { animation-delay: 750ms; }
+.anim .art.is-drawn .shape--bronze { animation-delay: 1000ms; }
+.anim .art.is-drawn .shape--sage   { animation-delay: 1150ms; }
+.anim .art.is-drawn text { opacity: 1; transition: opacity 800ms ease 1500ms; }
 
 /* Появление фигур: прозрачность + отдельное свойство scale.
    clip-path здесь не используется: в Safari и старых браузерах он на
@@ -404,13 +404,13 @@ em { font-style: italic; color: var(--bronze); }
 }
 
 /* ============ Reveal on scroll ============ */
-.js .reveal {
+.anim .reveal {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out);
   transition-delay: var(--d, 0ms);
 }
-.js .reveal.is-in { opacity: 1; transform: none; }
+.anim .reveal.is-in { opacity: 1; transform: none; }
 
 /* ============ About ============ */
 .about {
@@ -548,8 +548,8 @@ em { font-style: italic; color: var(--bronze); }
 .sa-tick   { fill: none; stroke: var(--ink); stroke-width: 1; }
 
 /* compass slowly swings when the tile is in view */
-.js .service-art.is-in .sa-leg,
-.js .service-art.is-in .sa-tip {
+.anim .service-art.is-in .sa-leg,
+.anim .service-art.is-in .sa-tip {
   transform-origin: 236px 50px;
   animation: swing 6s var(--ease-in-out) infinite alternate;
 }
@@ -1154,14 +1154,14 @@ a.tile { display: block; color: inherit; }
 /* ============ Reduced motion ============ */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js .reveal { transform: none; transition: opacity 400ms ease; }
-  .js .art.is-drawn .line,
-  .js .art.is-drawn .dim line { transition: none; }
-  .js .art.is-drawn .shape { animation: none; transition: opacity 400ms ease; }
+  .anim .reveal { transform: none; transition: opacity 400ms ease; }
+  .anim .art.is-drawn .line,
+  .anim .art.is-drawn .dim line { transition: none; }
+  .anim .art.is-drawn .shape { animation: none; transition: opacity 400ms ease; }
   .art [data-depth] { transition: none; transform: none !important; }
   .tile__art svg { transition: none; }
-  .js .service-art.is-in .sa-leg,
-  .js .service-art.is-in .sa-tip { animation: none; }
+  .anim .service-art.is-in .sa-leg,
+  .anim .service-art.is-in .sa-tip { animation: none; }
   .rail__num { transition: opacity 250ms ease; }
 }
 

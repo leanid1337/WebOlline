@@ -1,6 +1,8 @@
 (() => {
   const root = document.documentElement;
-  root.classList.add("js");
+  // "js" ставится ещё в <head>, "anim" — только когда этот файл реально выполнился:
+  // если скрипт не загрузится, элементы просто останутся видимыми без анимации.
+  root.classList.add("js", "anim");
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -14,9 +16,14 @@
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
-  // Hero drawing: start on next frame so the initial state paints first
+  // Hero drawing: start on the next frame so the initial state paints first.
+  // requestAnimationFrame не выполняется в фоновой вкладке, поэтому есть
+  // страховка таймером и повтор при возвращении на вкладку.
   const art = document.querySelector(".art");
-  requestAnimationFrame(() => requestAnimationFrame(() => art && art.classList.add("is-drawn")));
+  const startDrawing = () => art && art.classList.add("is-drawn");
+  requestAnimationFrame(() => requestAnimationFrame(startDrawing));
+  setTimeout(startDrawing, 600);
+  document.addEventListener("visibilitychange", startDrawing, { once: true });
 
   // Staggered reveal on scroll
   const items = document.querySelectorAll(".reveal");
