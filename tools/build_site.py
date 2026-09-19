@@ -18,7 +18,7 @@ SITE_URL = "https://olline.design"          # <-- поменяйте на сво
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DIST = os.path.join(ROOT, "dist")
 TEXT_FILES = ["index.html", "404.html", "styles.css", "script.js", "gallery.js"]
-COPY_FILES = ["robots.txt", "sitemap.xml", "site.webmanifest", ".htaccess",
+COPY_FILES = ["robots.txt", "sitemap.xml", "site.webmanifest", "favicon.ico", ".htaccess",
               "_headers", "netlify.toml", "vercel.json"]
 COPY_DIRS = ["media", "icons"]
 
@@ -101,9 +101,13 @@ def main():
 
     for name in COPY_FILES:
         src = os.path.join(ROOT, name)
-        if os.path.exists(src):
-            text = open(src, encoding="utf-8").read().replace("https://olline.design", SITE_URL)
-            open(os.path.join(DIST, name), "w", encoding="utf-8").write(text)
+        if not os.path.exists(src):
+            continue
+        if name.endswith((".ico", ".png", ".jpg", ".webp")):   # двоичные копируем как есть
+            shutil.copy2(src, os.path.join(DIST, name))
+            continue
+        text = open(src, encoding="utf-8").read().replace("https://olline.design", SITE_URL)
+        open(os.path.join(DIST, name), "w", encoding="utf-8").write(text)
 
     total = sum(os.path.getsize(os.path.join(r, f))
                 for r, _, fs in os.walk(DIST) for f in fs)

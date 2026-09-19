@@ -1537,3 +1537,12 @@ a.tile { display: block; color: inherit; }
 }
 @media (max-width: 960px) { .steps { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+
+/* ============ Пока открыт просмотр работы ============ */
+/* останавливаем всё, что рисуется в фоне: иначе браузер параллельно
+   считает анимации и декодирует видео под затемнением */
+.lb-open .floater__art,
+.lb-open .service-art .sa-leg,
+.lb-open .service-art .sa-tip { animation-play-state: paused; }
+.lb-open .hero__bg,
+.lb-open .rail { visibility: hidden; }

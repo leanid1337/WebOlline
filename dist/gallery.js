@@ -207,6 +207,9 @@ const count = document.getElementById("lightbox-count");
 let lbIndex = 0;
 let lastFocus = null;
 const show = (i) => {
+document.querySelectorAll("video").forEach((v) => {
+if (!stage.contains(v) && !v.paused) v.pause();
+});
 const items = list();
 lbIndex = (i + items.length) % items.length;
 const it = items[lbIndex];
@@ -229,8 +232,27 @@ if (n && n.kind !== "video") new Image().src = n.src;
 }
 count.textContent = `${sections[section].title} · ${lbIndex + 1} / ${items.length}`;
 };
+
+
+
+const pauseBackground = () => {
+document.documentElement.classList.add("lb-open");
+document.querySelectorAll("video").forEach((v) => {
+if (!stage.contains(v)) v.pause();
+});
+};
+const resumeBackground = () => {
+document.documentElement.classList.remove("lb-open");
+const heroVideo = document.querySelector(".hero__video");
+if (heroVideo && heroVideo.currentSrc) {
+const r = heroVideo.getBoundingClientRect();
+if (r.bottom > 0 && r.top < window.innerHeight) heroVideo.play().catch(() => {});
+}
+if (MAX_PLAYING && !reduceMotion) queueSync();
+};
 const open = (i) => {
 lastFocus = document.activeElement;
+pauseBackground();
 show(i);
 document.documentElement.style.overflow = "hidden";
 dialog.showModal();
@@ -239,6 +261,7 @@ dialog.addEventListener("close", () => {
 stage.querySelectorAll("video").forEach((v) => v.pause());
 stage.innerHTML = "";
 document.documentElement.style.overflow = "";
+resumeBackground();
 if (lastFocus) lastFocus.focus({ preventScroll: true });
 });
 gallery.addEventListener("click", (e) => {
