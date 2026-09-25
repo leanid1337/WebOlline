@@ -126,29 +126,54 @@ sections.forEach((s) => so.observe(s));
 }
 
 
+
+
 const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 if (art && canHover && !reduceMotion) {
 const figure = art.closest(".hero__art") || art;
-const layers = art.querySelectorAll("[data-depth]");
+const layers = [...art.querySelectorAll("[data-depth]")];
+let targetX = 0, targetY = 0, targetBoost = 1;
+let curX = 0, curY = 0, boost = 1;
 let frame = 0;
-let boost = 1;
-figure.addEventListener("pointerenter", () => { boost = 2; figure.classList.add("is-live"); });
-figure.addEventListener("pointerleave", () => { boost = 1; figure.classList.remove("is-live"); });
-window.addEventListener("pointermove", (e) => {
-cancelAnimationFrame(frame);
-frame = requestAnimationFrame(() => {
-const x = e.clientX / window.innerWidth - 0.5;
-const y = e.clientY / window.innerHeight - 0.5;
+let rect = null;
+const refreshRect = () => { rect = figure.getBoundingClientRect(); };
+window.addEventListener("resize", refreshRect);
+window.addEventListener("scroll", refreshRect, { passive: true });
+const step = () => {
+frame = 0;
+const ease = 0.12;
+curX += (targetX - curX) * ease;
+curY += (targetY - curY) * ease;
+boost += (targetBoost - boost) * ease;
 layers.forEach((layer) => {
 const d = Number(layer.dataset.depth) * 3 * boost;
-layer.style.transform = `translate(${(-x * d).toFixed(2)}px, ${(-y * d).toFixed(2)}px)`;
+layer.style.transform = `translate(${(-curX * d).toFixed(2)}px, ${(-curY * d).toFixed(2)}px)`;
 });
 
 
 art.style.transform =
-`translate(${(-x * 14 * boost).toFixed(2)}px, ${(-y * 10 * boost).toFixed(2)}px)`;
-});
-});
+`translate(${(-curX * 14 * boost).toFixed(2)}px, ${(-curY * 10 * boost).toFixed(2)}px)`;
+const settled = Math.abs(targetX - curX) < 0.002 &&
+Math.abs(targetY - curY) < 0.002 &&
+Math.abs(targetBoost - boost) < 0.01;
+if (!settled) frame = requestAnimationFrame(step);
+};
+const run = () => { if (!frame) frame = requestAnimationFrame(step); };
+window.addEventListener("pointermove", (e) => {
+if (!rect) refreshRect();
+
+const cx = rect.left + rect.width / 2;
+const cy = rect.top + rect.height / 2;
+targetX = Math.max(-1, Math.min(1, (e.clientX - cx) / (window.innerWidth / 2)));
+targetY = Math.max(-1, Math.min(1, (e.clientY - cy) / (window.innerHeight / 2)));
+run();
+}, { passive: true });
+figure.addEventListener("pointerenter", () => { targetBoost = 1.8; figure.classList.add("is-live"); run(); });
+figure.addEventListener("pointerleave", () => { targetBoost = 1; figure.classList.remove("is-live"); run(); });
+
+const reset = () => { targetX = 0; targetY = 0; targetBoost = 1; figure.classList.remove("is-live"); run(); };
+document.addEventListener("pointerleave", reset);
+window.addEventListener("blur", reset);
 }
 })();
 (() => {

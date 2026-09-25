@@ -135,33 +135,64 @@
     sections.forEach((s) => so.observe(s));
   }
 
-  // Parallax on the hero composition: layers drift and the whole sheet tilts
-  // with the pointer; the effect strengthens while the pointer is over it.
+  // Слежение композиции за курсором. Положение не переключается скачками:
+  // на каждом кадре текущее значение подтягивается к целевому, поэтому
+  // движение плавное, а когда курсор уходит из окна, композиция так же
+  // плавно возвращается в исходное положение.
   const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   if (art && canHover && !reduceMotion) {
     const figure = art.closest(".hero__art") || art;
-    const layers = art.querySelectorAll("[data-depth]");
-    let frame = 0;
-    let boost = 1;
+    const layers = [...art.querySelectorAll("[data-depth]")];
 
-    figure.addEventListener("pointerenter", () => { boost = 2; figure.classList.add("is-live"); });
-    figure.addEventListener("pointerleave", () => { boost = 1; figure.classList.remove("is-live"); });
+    let targetX = 0, targetY = 0, targetBoost = 1;   // куда стремимся
+    let curX = 0, curY = 0, boost = 1;               // где находимся сейчас
+    let frame = 0;
+    let rect = null;
+
+    const refreshRect = () => { rect = figure.getBoundingClientRect(); };
+    window.addEventListener("resize", refreshRect);
+    window.addEventListener("scroll", refreshRect, { passive: true });
+
+    const step = () => {
+      frame = 0;
+      const ease = 0.12;
+      curX += (targetX - curX) * ease;
+      curY += (targetY - curY) * ease;
+      boost += (targetBoost - boost) * ease;
+
+      layers.forEach((layer) => {
+        const d = Number(layer.dataset.depth) * 3 * boost;
+        layer.style.transform = `translate(${(-curX * d).toFixed(2)}px, ${(-curY * d).toFixed(2)}px)`;
+      });
+      // только плоское смещение: 3D-повороты в Safari меняли порядок
+      // отрисовки, и композиция уезжала за фоновое видео
+      art.style.transform =
+        `translate(${(-curX * 14 * boost).toFixed(2)}px, ${(-curY * 10 * boost).toFixed(2)}px)`;
+
+      const settled = Math.abs(targetX - curX) < 0.002 &&
+                      Math.abs(targetY - curY) < 0.002 &&
+                      Math.abs(targetBoost - boost) < 0.01;
+      if (!settled) frame = requestAnimationFrame(step);
+    };
+    const run = () => { if (!frame) frame = requestAnimationFrame(step); };
 
     window.addEventListener("pointermove", (e) => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const x = e.clientX / window.innerWidth - 0.5;   // -0.5 … 0.5
-        const y = e.clientY / window.innerHeight - 0.5;
-        layers.forEach((layer) => {
-          const d = Number(layer.dataset.depth) * 3 * boost;
-          layer.style.transform = `translate(${(-x * d).toFixed(2)}px, ${(-y * d).toFixed(2)}px)`;
-        });
-        // только плоское смещение: 3D-повороты в Safari меняли порядок
-        // отрисовки, и композиция уезжала за фоновое видео
-        art.style.transform =
-          `translate(${(-x * 14 * boost).toFixed(2)}px, ${(-y * 10 * boost).toFixed(2)}px)`;
-      });
-    });
+      if (!rect) refreshRect();
+      // смещение курсора от центра композиции, ограниченное диапазоном -1…1
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      targetX = Math.max(-1, Math.min(1, (e.clientX - cx) / (window.innerWidth / 2)));
+      targetY = Math.max(-1, Math.min(1, (e.clientY - cy) / (window.innerHeight / 2)));
+      run();
+    }, { passive: true });
+
+    figure.addEventListener("pointerenter", () => { targetBoost = 1.8; figure.classList.add("is-live"); run(); });
+    figure.addEventListener("pointerleave", () => { targetBoost = 1; figure.classList.remove("is-live"); run(); });
+
+    // курсор ушёл из окна или окно потеряло фокус — плавно возвращаемся в центр
+    const reset = () => { targetX = 0; targetY = 0; targetBoost = 1; figure.classList.remove("is-live"); run(); };
+    document.addEventListener("pointerleave", reset);
+    window.addEventListener("blur", reset);
   }
 })();
 

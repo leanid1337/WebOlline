@@ -369,7 +369,7 @@ em { font-style: italic; color: var(--bronze); }
   fill: var(--muted);
 }
 
-.art [data-depth] { transition: transform 900ms var(--ease-out); }
+
 
 /* hero draw-in (runs once on load) */
 .anim .art .line,
@@ -1373,15 +1373,13 @@ a.tile { display: block; color: inherit; }
   .g-num { transition: none; }
 }
 
-/* hero composition follows the pointer */
-.hero__art .art {
-  transition: transform 500ms var(--ease-out);
-}
-.hero__art.is-live .art { transition-duration: 320ms; }
-.art [data-depth] { transition: transform 500ms var(--ease-out); }
-.hero__art.is-live [data-depth] { transition-duration: 320ms; }
+/* Слежение за курсором считается покадрово в script.js.
+   CSS-переходов у этих transform нет специально: они накладывались
+   на покадровый расчёт и движение выглядело вязким и запаздывающим. */
+.hero__art .art,
+.art [data-depth] { transition: none; }
 @media (prefers-reduced-motion: reduce) {
-  .hero__art .art { transition: none; transform: none !important; }
+  .hero__art .art { transform: none !important; }
 }
 
 /* ============ Floating architectural shapes ============ */
