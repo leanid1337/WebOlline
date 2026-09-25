@@ -1166,7 +1166,7 @@ a.tile { display: block; color: inherit; }
 }
 .hero__bg {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   top: 0;
   bottom: 0;
   left: 50%;
@@ -1365,7 +1365,7 @@ a.tile { display: block; color: inherit; }
 .footer__sheet { letter-spacing: 0.2em; }
 
 /* hero: the composition gets a proper drawing frame */
-.hero__art { position: relative; }
+.hero__art { position: relative; z-index: 1; }
 .hero .art .guides line,
 .hero .art .guides circle { stroke-dasharray: 0.004 0.01; }
 
@@ -1374,9 +1374,7 @@ a.tile { display: block; color: inherit; }
 }
 
 /* hero composition follows the pointer */
-.hero__art { perspective: 1400px; }
 .hero__art .art {
-  transform-style: preserve-3d;
   transition: transform 500ms var(--ease-out);
 }
 .hero__art.is-live .art { transition-duration: 320ms; }

@@ -156,8 +156,10 @@
           const d = Number(layer.dataset.depth) * 3 * boost;
           layer.style.transform = `translate(${(-x * d).toFixed(2)}px, ${(-y * d).toFixed(2)}px)`;
         });
+        // только плоское смещение: 3D-повороты в Safari меняли порядок
+        // отрисовки, и композиция уезжала за фоновое видео
         art.style.transform =
-          `rotateY(${(x * 5 * boost).toFixed(2)}deg) rotateX(${(-y * 4 * boost).toFixed(2)}deg)`;
+          `translate(${(-x * 14 * boost).toFixed(2)}px, ${(-y * 10 * boost).toFixed(2)}px)`;
       });
     });
   }
