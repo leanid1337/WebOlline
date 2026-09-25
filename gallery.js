@@ -9,7 +9,7 @@
   const coarse = window.matchMedia("(hover: none), (max-width: 760px)").matches;
   const weak = (navigator.hardwareConcurrency || 4) <= 4;
   // how many grid videos may play at once; phones, slow links and weak machines: tap to play
-  const MAX_PLAYING = savesData || coarse ? 0 : weak ? 1 : 3;
+  const MAX_PLAYING = savesData || coarse ? 0 : weak ? 1 : 2;
   const PAGE = coarse ? 8 : 12;
   const TYPES = ["viz", "video", "plan", "draw"];
   const labels = { viz: "Визуализация", video: "Видео", plan: "Планировка", draw: "Рабочий чертёж" };
@@ -80,35 +80,54 @@
 
   const list = () => (sections[section] ? sections[section].items[type] : []);
 
-  /* ---------- video playback: only a few, only near the middle of the screen ---------- */
+  /* ---------- воспроизведение: только пара роликов и только в покое ----------
+     Раньше ролики стартовали прямо в момент появления на экране: браузер
+     одновременно тянул файл, поднимал декодер и рисовал кадры прокрутки —
+     отсюда заметный рывок. Теперь старт откладывается до остановки
+     прокрутки, а координаты считаются один раз, а не на каждом кадре. */
   const visible = new Set();
-  let playFrame = 0;
+  let scrolling = false;
+  let idleTimer = 0;
+
   const syncPlayback = () => {
-    playFrame = 0;
+    if (!MAX_PLAYING || reduceMotion) return;
     const mid = window.innerHeight / 2;
-    [...visible]
-      .sort((a, b) => {
-        const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
-        return Math.abs(ra.top + ra.height / 2 - mid) - Math.abs(rb.top + rb.height / 2 - mid);
+    // один замер координат на всю группу, не в цикле прокрутки
+    const ranked = [...visible]
+      .map((v) => {
+        const r = v.getBoundingClientRect();
+        return { v, dist: Math.abs(r.top + r.height / 2 - mid) };
       })
-      .forEach((v, i) => {
-        if (i < MAX_PLAYING) v.play().catch(() => {});
-        else if (!v.paused) v.pause();
-      });
+      .sort((a, b) => a.dist - b.dist);
+    ranked.forEach(({ v }, i) => {
+      if (i < MAX_PLAYING) {
+        if (v.paused) v.play().catch(() => {});
+      } else if (!v.paused) {
+        v.pause();
+      }
+    });
   };
-  const queueSync = () => {
-    if (!playFrame) playFrame = requestAnimationFrame(syncPlayback);
+
+  const onScroll = () => {
+    scrolling = true;
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => { scrolling = false; syncPlayback(); }, 180);
   };
+
   const videoIO = "IntersectionObserver" in window
     ? new IntersectionObserver((entries) => {
         entries.forEach(({ target, isIntersecting }) => {
-          if (isIntersecting) visible.add(target);
-          else { visible.delete(target); target.pause(); }
+          if (isIntersecting) {
+            visible.add(target);
+          } else {
+            visible.delete(target);
+            target.pause();          // уход с экрана останавливаем сразу, это дёшево
+          }
         });
-        if (MAX_PLAYING && !reduceMotion) queueSync();
+        if (!scrolling) syncPlayback();   // запуск только когда прокрутка стоит
       }, { threshold: 0.35 })
     : null;
-  if (MAX_PLAYING && !reduceMotion) window.addEventListener("scroll", queueSync, { passive: true });
+  if (MAX_PLAYING && !reduceMotion) window.addEventListener("scroll", onScroll, { passive: true });
 
   /* ---------- masonry: row span from aspect ratio ---------- */
   const layout = () => {
@@ -142,7 +161,10 @@
     btn.setAttribute("aria-label", `${label}. Открыть`);
     const sheet = `<span class="g-num" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>`;
     if (it.kind === "video") {
-      btn.innerHTML = `${playIcon}${sheet}<span class="g-frame"><video muted loop playsinline preload="none" poster="${it.poster}"><source src="${it.src}" type="video/mp4"></video></span>`;
+      // в плитке играет облегчённая копия: полный ролик декодировать
+      // ради ячейки шириной ~380 px слишком дорого
+      const gridSrc = it.small || it.src;
+      btn.innerHTML = `${playIcon}${sheet}<span class="g-frame"><video muted loop playsinline preload="none" poster="${it.poster}"><source src="${gridSrc}" type="video/mp4"></video></span>`;
       if (videoIO) videoIO.observe(btn.querySelector("video"));
     } else {
       const srcset = it.small
@@ -275,7 +297,7 @@
       const r = heroVideo.getBoundingClientRect();
       if (r.bottom > 0 && r.top < window.innerHeight) heroVideo.play().catch(() => {});
     }
-    if (MAX_PLAYING && !reduceMotion) queueSync();
+    syncPlayback();
   };
 
   const open = (i) => {

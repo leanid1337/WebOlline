@@ -44,6 +44,7 @@ VIDEO_EXT = {".mp4", ".mov", ".m4v", ".webm", ".avi"}
 PREVIEW_FOLDERS = {"превью", "первью", "preview"}
 THUMB_W = 760
 THUMB_SM_W = 420   # extra small thumbnail for phones (srcset)
+VIDEO_GRID_W = 640  # облегчённая копия ролика для плитки в сетке
 HERO_VARIANTS = [(1600, 22), (1100, 24), (700, 27)]  # (long edge, crf) for the first-screen video
 THUMB_MAX_H = 1100  # very tall sheets get a top crop for the grid
 
@@ -196,8 +197,17 @@ def main():
                 jobs.append((os.path.join(tpath, f), unique_name(slug(f), used)))
             dst = os.path.join(OUT, key, tkey)
             if tkey == "video":
+                def build_pair(j):
+                    full = build_video(j[0], dst, j[1], edge)
+                    # мелкая копия для сетки: в плитке ролик занимает ~380 px,
+                    # декодировать ради этого кадр 1280 px слишком дорого
+                    small = build_video(j[0], dst, j[1] + "-sm", VIDEO_GRID_W, 28)
+                    os.remove(os.path.join(dst, j[1] + "-sm.webp"))
+                    produced.discard(os.path.join(dst, j[1] + "-sm.webp"))
+                    full["small"] = small["src"]
+                    return full
                 with ThreadPoolExecutor(3) as ex:
-                    items[tkey] = list(ex.map(lambda j: build_video(j[0], dst, j[1], edge), jobs))
+                    items[tkey] = list(ex.map(build_pair, jobs))
             else:
                 with ThreadPoolExecutor(6) as ex:
                     items[tkey] = list(ex.map(lambda j: build_image(j[0], dst, j[1], edge), jobs))
