@@ -52,7 +52,10 @@
     sections[s.key] = { title: s.title, items };
   });
 
-  let section = data.sections[0]?.key || "commercial";
+  // какое направление открыто по умолчанию, решает порядок кнопок в разметке
+  const firstTab = document.querySelector(".p-section.is-active") || document.querySelector(".p-section");
+  let section = (firstTab && sections[firstTab.dataset.dir]) ? firstTab.dataset.dir
+              : (data.sections[0]?.key || "residential");
   let type = "all";
   let shown = 0;
 

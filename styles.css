@@ -1537,3 +1537,13 @@ a.tile { display: block; color: inherit; }
 .lb-open .service-art .sa-tip { animation-play-state: paused; }
 .lb-open .hero__bg,
 .lb-open .rail { visibility: hidden; }
+
+/* контакт без ссылки (например, WhatsApp, пока нет номера телефона) */
+.contact__plain {
+  font-weight: 400;
+  font-size: clamp(20px, 1.6vw + 12px, 38px);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--night-text);
+}

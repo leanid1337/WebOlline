@@ -47,7 +47,10 @@ all.push(...items.plan, ...items.draw);
 items.all = all;
 sections[s.key] = { title: s.title, items };
 });
-let section = data.sections[0]?.key || "commercial";
+
+const firstTab = document.querySelector(".p-section.is-active") || document.querySelector(".p-section");
+let section = (firstTab && sections[firstTab.dataset.dir]) ? firstTab.dataset.dir
+: (data.sections[0]?.key || "residential");
 let type = "all";
 let shown = 0;
 const sectionBtns = document.querySelectorAll(".p-section");
