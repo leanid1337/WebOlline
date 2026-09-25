@@ -25,6 +25,21 @@
   setTimeout(startDrawing, 600);
   document.addEventListener("visibilitychange", startDrawing, { once: true });
 
+  // Страховка: если через 3 секунды что-то из композиции всё ещё прозрачно
+  // (браузер не понял анимацию, переход не сработал), показываем принудительно.
+  setTimeout(() => {
+    if (!art) return;
+    art.querySelectorAll(".shape, text, .guides").forEach((el) => {
+      if (Number(getComputedStyle(el).opacity) < 0.9) el.style.opacity = "1";
+    });
+    art.querySelectorAll(".line, .dim line").forEach((el) => {
+      if (parseFloat(getComputedStyle(el).strokeDashoffset) > 0.01) {
+        el.style.strokeDasharray = "none";
+        el.style.strokeDashoffset = "0";
+      }
+    });
+  }, 3000);
+
   // Staggered reveal on scroll
   const items = document.querySelectorAll(".reveal");
   const groups = new Map();

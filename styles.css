@@ -384,24 +384,17 @@ em { font-style: italic; color: var(--bronze); }
   stroke-dashoffset: 0;
   transition: stroke-dashoffset 1600ms var(--ease-in-out) 300ms;
 }
-.anim .art.is-drawn .shape { opacity: 1; animation: rise 1100ms var(--ease-out) backwards; }
-.anim .art.is-drawn .shape--sand   { animation-delay: 500ms; }
-.anim .art.is-drawn .shape--oak    { animation-delay: 750ms; }
-.anim .art.is-drawn .shape--bronze { animation-delay: 1000ms; }
-.anim .art.is-drawn .shape--sage   { animation-delay: 1150ms; }
-.anim .art.is-drawn text { opacity: 1; transition: opacity 800ms ease 1500ms; }
-
-/* Появление фигур: прозрачность + отдельное свойство scale.
-   clip-path здесь не используется: в Safari и старых браузерах он на
-   SVG-элементах считается от другой системы координат и фигуры пропадали. */
-.art .shape {
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-}
-@keyframes rise {
-  from { opacity: 0; scale: 0.94; }
-  to   { opacity: 1; scale: 1; }
-}
+/* Появление фигур — обычный переход прозрачности со своей задержкой у каждой.
+   Ни keyframes, ни clip-path, ни fill-mode: в разных браузерах именно они
+   оставляли фигуры невидимыми. Здесь худшее, что может случиться, —
+   фигуры появятся сразу, без плавности. */
+.anim .art .shape { transition: opacity 900ms var(--ease-out) var(--d, 0ms); }
+.anim .art.is-drawn .shape { opacity: 1; }
+.anim .art .shape--sand   { --d: 500ms; }
+.anim .art .shape--oak    { --d: 700ms; }
+.anim .art .shape--bronze { --d: 900ms; }
+.anim .art .shape--sage   { --d: 1050ms; }
+.anim .art.is-drawn text { opacity: 1; transition: opacity 800ms ease 1300ms; }
 
 /* ============ Reveal on scroll ============ */
 .anim .reveal {
