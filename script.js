@@ -16,6 +16,37 @@
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
+  // Экран загрузки: уходит, когда страница готова, но не раньше, чем
+  // отработает минимум времени — иначе он просто мигнёт. Если что-то
+  // пойдёт не так, страховочный таймер всё равно его уберёт.
+  const loader = document.querySelector(".loader");
+  if (loader) {
+    const bar = loader.querySelector("i");
+    const startedAt = performance.now();
+    const MIN_VISIBLE = 900;
+    let finished = false;
+
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      setTimeout(() => {
+        if (bar) {
+          bar.style.animation = "none";
+          bar.style.transition = "transform 260ms ease-out";
+          bar.style.transform = "scaleX(1)";
+        }
+        setTimeout(() => {
+          loader.classList.add("is-done");
+          setTimeout(() => root.classList.remove("loading"), 850);
+        }, 240);
+      }, Math.max(0, MIN_VISIBLE - (performance.now() - startedAt)));
+    };
+
+    if (document.readyState === "complete") finish();
+    else window.addEventListener("load", finish, { once: true });
+    setTimeout(finish, 4000);
+  }
+
   // Hero drawing: start on the next frame so the initial state paints first.
   // requestAnimationFrame не выполняется в фоновой вкладке, поэтому есть
   // страховка таймером и повтор при возвращении на вкладку.

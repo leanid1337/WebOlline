@@ -15,6 +15,34 @@ window.addEventListener("scroll", onScroll, { passive: true });
 
 
 
+const loader = document.querySelector(".loader");
+if (loader) {
+const bar = loader.querySelector("i");
+const startedAt = performance.now();
+const MIN_VISIBLE = 900;
+let finished = false;
+const finish = () => {
+if (finished) return;
+finished = true;
+setTimeout(() => {
+if (bar) {
+bar.style.animation = "none";
+bar.style.transition = "transform 260ms ease-out";
+bar.style.transform = "scaleX(1)";
+}
+setTimeout(() => {
+loader.classList.add("is-done");
+setTimeout(() => root.classList.remove("loading"), 850);
+}, 240);
+}, Math.max(0, MIN_VISIBLE - (performance.now() - startedAt)));
+};
+if (document.readyState === "complete") finish();
+else window.addEventListener("load", finish, { once: true });
+setTimeout(finish, 4000);
+}
+
+
+
 const art = document.querySelector(".art");
 const startDrawing = () => art && art.classList.add("is-drawn");
 requestAnimationFrame(() => requestAnimationFrame(startDrawing));

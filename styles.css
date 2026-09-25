@@ -1545,3 +1545,87 @@ a.tile { display: block; color: inherit; }
   align-items: center;
   color: var(--night-text);
 }
+
+/* ============ Экран загрузки ============ */
+.loader { display: none; }
+
+.js.loading .loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: clamp(22px, 3vw, 34px);
+  background: var(--deep);
+  color: var(--night-text);
+}
+.js.loading body { overflow: hidden; }
+
+.loader__mark { width: clamp(64px, 8vw, 96px); height: auto; }
+.loader__ring {
+  fill: none;
+  stroke: rgba(240, 233, 223, 0.22);
+  stroke-width: 1;
+  stroke-dasharray: 3 7;
+}
+.loader__needle {
+  fill: none;
+  stroke: var(--night-text);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  transform-origin: 32px 32px;             /* центр круга в координатах рисунка */
+  animation: needle 1.6s cubic-bezier(0.62, 0, 0.38, 1) infinite;
+}
+.loader__pivot { fill: var(--clay); }
+
+@keyframes needle {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.loader__word {
+  font-size: var(--fs-label);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(240, 233, 223, 0.72);
+}
+.loader__word span { color: var(--clay); }
+
+.loader__bar {
+  position: relative;
+  width: min(220px, 46vw);
+  height: 1px;
+  background: rgba(240, 233, 223, 0.18);
+  overflow: hidden;
+}
+.loader__bar i {
+  position: absolute;
+  inset: 0;
+  background: var(--night-text);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: loader-fill 1.4s ease-out forwards;
+}
+@keyframes loader-fill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(0.9); }
+}
+
+/* уход: экран поднимается вверх и открывает первый экран */
+.js.loading .loader.is-done {
+  transform: translateY(-100%);
+  transition: transform 800ms cubic-bezier(0.77, 0, 0.175, 1);
+}
+.js.loading .loader.is-done .loader__mark,
+.js.loading .loader.is-done .loader__word,
+.js.loading .loader.is-done .loader__bar {
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader__needle { animation: none; }
+  .loader__bar i { animation: none; transform: scaleX(0.9); }
+  .js.loading .loader.is-done { transform: none; opacity: 0; transition: opacity 300ms ease; }
+}

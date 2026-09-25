@@ -28,10 +28,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=33">
-  <script>document.documentElement.classList.add("js")</script>
+  <link rel="stylesheet" href="styles.css?v=34">
+  <script>
+    document.documentElement.classList.add("js", "loading");
+    setTimeout(function () { document.documentElement.classList.remove("loading"); }, 5000);
+  </script>
 </head>
 <body>
+
+  <div class="loader" aria-hidden="true">
+    <svg class="loader__mark" viewBox="0 0 64 64">
+      <circle class="loader__ring" cx="32" cy="32" r="27"/>
+      <path class="loader__needle" d="M14 14L50 50"/>
+      <circle class="loader__pivot" cx="32" cy="32" r="2.5"/>
+    </svg>
+    <p class="loader__word">Olline<span>.</span>design</p>
+    <span class="loader__bar"><i></i></span>
+  </div>
 
   <header class="header">
     <div class="wrap header__inner">
@@ -500,8 +513,8 @@
   }
   </script>
 
-  <script src="media/manifest.js?v=33"></script>
-  <script src="script.js?v=33"></script>
-  <script src="gallery.js?v=33"></script>
+  <script src="media/manifest.js?v=34"></script>
+  <script src="script.js?v=34"></script>
+  <script src="gallery.js?v=34"></script>
 </body>
 </html>
