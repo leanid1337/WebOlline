@@ -4,7 +4,7 @@
 (() => {
   const DICT = {
     ru: {
-      "meta.title": "Дизайн интерьера и визуализации — Olline.design | Olga Lavreka",
+      "meta.title": "Дизайн интерьера и визуализации — Ollline.design | Olga Lavreka",
       "meta.description": "Архитектор Olga Lavreka: дизайн интерьера квартир и домов, 3D-визуализации, планировки и рабочие чертежи. Более 20 лет практики, работа с частными клиентами и студиями.",
 
       "nav.about": "Обо мне",
@@ -98,7 +98,7 @@
     },
 
     uk: {
-      "meta.title": "Дизайн інтер'єру та візуалізації — Olline.design | Olga Lavreka",
+      "meta.title": "Дизайн інтер'єру та візуалізації — Ollline.design | Olga Lavreka",
       "meta.description": "Архітектор Olga Lavreka: дизайн інтер'єру квартир і будинків, 3D-візуалізації, планування та робочі креслення. Понад 20 років практики, робота з приватними клієнтами та студіями.",
 
       "nav.about": "Про мене",
@@ -192,7 +192,7 @@
     },
 
     en: {
-      "meta.title": "Interior design and 3D visualisation — Olline.design | Olga Lavreka",
+      "meta.title": "Interior design and 3D visualisation — Ollline.design | Olga Lavreka",
       "meta.description": "Architect Olga Lavreka: interior design for flats and houses, 3D visualisation, layouts and working drawings. Over 20 years of practice, working with private clients and studios.",
 
       "nav.about": "About",

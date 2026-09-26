@@ -13,7 +13,7 @@ import os
 import re
 import shutil
 
-SITE_URL = "https://olline.design"          # <-- поменяйте на свой домен, без слэша в конце
+SITE_URL = "https://ollline.design"          # <-- поменяйте на свой домен, без слэша в конце
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DIST = os.path.join(ROOT, "dist")
@@ -74,7 +74,7 @@ def main():
         if not os.path.exists(src):
             continue
         text = open(src, encoding="utf-8").read()
-        text = text.replace("https://olline.design", SITE_URL)
+        text = text.replace("https://ollline.design", SITE_URL)
         before = len(text.encode("utf-8"))
         if name.endswith(".css"):
             text = minify_css(text)
@@ -106,7 +106,7 @@ def main():
         if name.endswith((".ico", ".png", ".jpg", ".webp")):   # двоичные копируем как есть
             shutil.copy2(src, os.path.join(DIST, name))
             continue
-        text = open(src, encoding="utf-8").read().replace("https://olline.design", SITE_URL)
+        text = open(src, encoding="utf-8").read().replace("https://ollline.design", SITE_URL)
         open(os.path.join(DIST, name), "w", encoding="utf-8").write(text)
 
     total = sum(os.path.getsize(os.path.join(r, f))

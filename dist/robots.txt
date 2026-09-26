@@ -3,4 +3,4 @@ Allow: /
 Disallow: /tools/
 Disallow: /.claude/
 
-Sitemap: https://olline.design/sitemap.xml
+Sitemap: https://ollline.design/sitemap.xml
