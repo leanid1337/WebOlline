@@ -17,8 +17,9 @@ const label = (kind) => (i18n ? i18n.t("g." + kind) : kind);
 const dirTitle = (key, fallback) => (i18n ? i18n.t("dir." + key) : fallback);
 
 const FEATURED = {
-commercial: ["bel-001", "chatgpt-image-11-iyul-2025-g-15-37-24", "chatgpt-image-12-iyul-2025-g-09-16-49",
-"chatgpt-image-16-iyul-2025-g-16-01-49", "bel-002"],
+commercial: ["kladno-viz003", "bel-001", "kladno-viz00118", "chatgpt-image-11-iyul-2025-g-15-37-24",
+"kladno-viz00113", "chatgpt-image-12-iyul-2025-g-09-16-49", "kladno-viz00117", "bel-002",
+"kladno-viz001119", "chatgpt-image-16-iyul-2025-g-16-01-49", "kladno-viz001127", "kladno-viz001120"],
 residential: ["alisa-02", "letnyany-8", "omega-4", "issa-05", "lisa-02", "letnyany-13",
 "praha-apart-0101", "omega-6", "issa-06"],
 architecture: ["lisa-55", "lisa-54", "lisa-57", "lisa-59"],

@@ -77,6 +77,204 @@ window.OLLINE_MEDIA = {
       "h": 507,
       "fw": 1536,
       "fh": 1024
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz001.webp",
+      "thumb": "media/commercial/viz/kladno-viz001-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz001-sm.webp",
+      "w": 760,
+      "h": 1100,
+      "fw": 1024,
+      "fh": 1536
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz0010.webp",
+      "thumb": "media/commercial/viz/kladno-viz0010-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz0010-sm.webp",
+      "w": 760,
+      "h": 285,
+      "fw": 2000,
+      "fh": 750
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz0011.webp",
+      "thumb": "media/commercial/viz/kladno-viz0011-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz0011-sm.webp",
+      "w": 760,
+      "h": 950,
+      "fw": 1122,
+      "fh": 1402
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz001119.webp",
+      "thumb": "media/commercial/viz/kladno-viz001119-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz001119-sm.webp",
+      "w": 760,
+      "h": 428,
+      "fw": 1672,
+      "fh": 941
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz00112.webp",
+      "thumb": "media/commercial/viz/kladno-viz00112-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz00112-sm.webp",
+      "w": 760,
+      "h": 950,
+      "fw": 1122,
+      "fh": 1402
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz001120.webp",
+      "thumb": "media/commercial/viz/kladno-viz001120-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz001120-sm.webp",
+      "w": 760,
+      "h": 382,
+      "fw": 1768,
+      "fh": 889
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz001121.webp",
+      "thumb": "media/commercial/viz/kladno-viz001121-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz001121-sm.webp",
+      "w": 760,
+      "h": 760,
+      "fw": 1254,
+      "fh": 1254
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz001122.webp",
+      "thumb": "media/commercial/viz/kladno-viz001122-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz001122-sm.webp",
+      "w": 760,
+      "h": 760,
+      "fw": 1254,
+      "fh": 1254
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz001126.webp",
+      "thumb": "media/commercial/viz/kladno-viz001126-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz001126-sm.webp",
+      "w": 760,
+      "h": 427,
+      "fw": 1673,
+      "fh": 940
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz001127.webp",
+      "thumb": "media/commercial/viz/kladno-viz001127-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz001127-sm.webp",
+      "w": 760,
+      "h": 427,
+      "fw": 1672,
+      "fh": 940
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz001128.webp",
+      "thumb": "media/commercial/viz/kladno-viz001128-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz001128-sm.webp",
+      "w": 760,
+      "h": 401,
+      "fw": 2000,
+      "fh": 1056
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz001129.webp",
+      "thumb": "media/commercial/viz/kladno-viz001129-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz001129-sm.webp",
+      "w": 760,
+      "h": 428,
+      "fw": 1672,
+      "fh": 941
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz00113.webp",
+      "thumb": "media/commercial/viz/kladno-viz00113-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz00113-sm.webp",
+      "w": 760,
+      "h": 427,
+      "fw": 1673,
+      "fh": 940
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz001131.webp",
+      "thumb": "media/commercial/viz/kladno-viz001131-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz001131-sm.webp",
+      "w": 760,
+      "h": 1013,
+      "fw": 1086,
+      "fh": 1448
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz00115.webp",
+      "thumb": "media/commercial/viz/kladno-viz00115-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz00115-sm.webp",
+      "w": 760,
+      "h": 325,
+      "fw": 1918,
+      "fh": 820
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz00117.webp",
+      "thumb": "media/commercial/viz/kladno-viz00117-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz00117-sm.webp",
+      "w": 760,
+      "h": 379,
+      "fw": 1777,
+      "fh": 885
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz00118.webp",
+      "thumb": "media/commercial/viz/kladno-viz00118-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz00118-sm.webp",
+      "w": 760,
+      "h": 325,
+      "fw": 1918,
+      "fh": 820
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz003.webp",
+      "thumb": "media/commercial/viz/kladno-viz003-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz003-sm.webp",
+      "w": 760,
+      "h": 382,
+      "fw": 1768,
+      "fh": 889
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz004.webp",
+      "thumb": "media/commercial/viz/kladno-viz004-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz004-sm.webp",
+      "w": 760,
+      "h": 382,
+      "fw": 1768,
+      "fh": 889
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz005.webp",
+      "thumb": "media/commercial/viz/kladno-viz005-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz005-sm.webp",
+      "w": 760,
+      "h": 379,
+      "fw": 1777,
+      "fh": 885
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz007.webp",
+      "thumb": "media/commercial/viz/kladno-viz007-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz007-sm.webp",
+      "w": 760,
+      "h": 382,
+      "fw": 1769,
+      "fh": 889
+     },
+     {
+      "src": "media/commercial/viz/kladno-viz008.webp",
+      "thumb": "media/commercial/viz/kladno-viz008-thumb.webp",
+      "small": "media/commercial/viz/kladno-viz008-sm.webp",
+      "w": 760,
+      "h": 255,
+      "fw": 2000,
+      "fh": 672
      }
     ],
     "video": [],
