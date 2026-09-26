@@ -1629,3 +1629,39 @@ a.tile { display: block; color: inherit; }
   .loader__bar i { animation: none; transform: scaleX(0.9); }
   .js.loading .loader.is-done { transform: none; opacity: 0; transition: opacity 300ms ease; }
 }
+
+/* ============ Переключатель языка ============ */
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: clamp(4px, 1vw, 16px);
+}
+.lang__btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  color: rgba(240, 233, 223, 0.5);
+  padding: 0.5em 0.55em;
+  min-height: 44px;
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+.lang__btn.is-active { color: var(--night-text); }
+.lang__btn.is-active::after {
+  content: "";
+  display: block;
+  height: 1px;
+  margin-top: 3px;
+  background: var(--clay);
+}
+@media (hover: hover) and (pointer: fine) {
+  .lang__btn:not(.is-active):hover { color: rgba(240, 233, 223, 0.85); }
+}
+@media (max-width: 460px) {
+  .lang { margin-left: 2px; }
+  .lang__btn { padding: 0.5em 0.35em; letter-spacing: 0.08em; }
+}

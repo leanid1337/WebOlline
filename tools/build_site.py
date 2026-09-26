@@ -17,7 +17,7 @@ SITE_URL = "https://olline.design"          # <-- поменяйте на сво
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DIST = os.path.join(ROOT, "dist")
-TEXT_FILES = ["index.html", "404.html", "styles.css", "script.js", "gallery.js"]
+TEXT_FILES = ["index.html", "404.html", "styles.css", "script.js", "gallery.js", "i18n.js"]
 COPY_FILES = ["robots.txt", "sitemap.xml", "site.webmanifest", "favicon.ico", ".htaccess",
               "_headers", "netlify.toml", "vercel.json"]
 COPY_DIRS = ["media", "icons"]

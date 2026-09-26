@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=35">
+  <link rel="stylesheet" href="styles.css?v=36">
   <script>
     document.documentElement.classList.add("js", "loading");
     setTimeout(function () { document.documentElement.classList.remove("loading"); }, 5000);
@@ -53,10 +53,15 @@
         <span>Olline<span class="logo__dot">.</span>design</span>
       </a>
       <nav class="nav" aria-label="Основная навигация">
-        <a href="#about">Обо мне</a>
-        <a href="#portfolio">Портфолио</a>
-        <a href="#services">Услуги</a>
-        <a href="#contact" class="nav__cta">Связаться</a>
+        <a href="#about" data-i18n="nav.about">Обо мне</a>
+        <a href="#portfolio" data-i18n="nav.portfolio">Портфолио</a>
+        <a href="#services" data-i18n="nav.services">Услуги</a>
+        <a href="#contact" class="nav__cta" data-i18n="nav.contact">Связаться</a>
+        <div class="lang" role="group" aria-label="Язык сайта" data-i18n-attr="aria-label:nav.lang">
+          <button type="button" class="lang__btn" data-lang="ru" aria-pressed="false">RU</button>
+          <button type="button" class="lang__btn" data-lang="uk" aria-pressed="false">UK</button>
+          <button type="button" class="lang__btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
       </nav>
     </div>
   </header>
@@ -81,17 +86,12 @@
         <video class="hero__video" muted loop playsinline preload="none" disablepictureinpicture></video>
       </div>
       <div class="hero__text">
-        <p class="eyebrow reveal">Olga Lavreka &nbsp;/&nbsp; архитектор</p>
-        <h1 class="hero__title reveal">
-          Пространство,<br>
-          <em>продуманное</em><br>
-          до линии
-          <span class="sr-only">. Дизайн интерьера, архитектура и 3D-визуализации — Olga Lavreka</span>
-        </h1>
-        <p class="hero__lead reveal">Архитектура и дизайн интерьеров. Планировки, визуализации, чертежи.</p>
+        <p class="eyebrow reveal" data-i18n="hero.eyebrow">Olga Lavreka &nbsp;/&nbsp; архитектор</p>
+        <h1 class="hero__title reveal" data-i18n="hero.title">Пространство,<br><em>продуманное</em><br>до линии<span class="sr-only">. Дизайн интерьера, архитектура и 3D-визуализации — Olga Lavreka</span></h1>
+        <p class="hero__lead reveal" data-i18n="hero.lead">Архитектура и дизайн интерьеров. Планировки, визуализации, чертежи.</p>
         <div class="hero__actions reveal">
-          <a href="#contact" class="btn btn--solid">Обсудить проект</a>
-          <a href="#portfolio" class="link-arrow">Портфолио <span aria-hidden="true">&rarr;</span></a>
+          <a href="#contact" class="btn btn--solid" data-i18n="hero.cta">Обсудить проект</a>
+          <a href="#portfolio" class="link-arrow" data-i18n="hero.more">Портфолио <span aria-hidden="true">&rarr;</span></a>
         </div>
       </div>
 
@@ -140,21 +140,21 @@
     <!-- ABOUT -->
     <section id="about" class="about wrap bleed" data-section="02" data-rail="dark">
       <figure class="about__portrait reveal">
-        <img src="media/about/olga-thumb.webp" alt="Olga Lavreka, архитектор" width="760" height="869" loading="lazy" decoding="async">
+        <img src="media/about/olga-thumb.webp" alt="Olga Lavreka, архитектор" data-i18n-attr="alt:about.portrait" width="760" height="869" loading="lazy" decoding="async">
         <video class="about__live" muted loop playsinline preload="none" poster="media/about/olga-thumb.webp" aria-hidden="true">
           <source src="media/about/olga-live.mp4" type="video/mp4">
         </video>
         <figcaption>Olga Lavreka</figcaption>
       </figure>
       <div class="about__body">
-        <p class="section-num reveal">02 &nbsp;/&nbsp; Обо мне</p>
-        <h2 class="h2 reveal">Более двадцати лет в архитектуре и&nbsp;дизайне интерьеров.</h2>
-        <p class="about__text reveal">Создаю функциональные, спокойные и точные пространства. От первой планировки до полного комплекта рабочей документации.</p>
+        <p class="section-num reveal" data-i18n="about.num">02 &nbsp;/&nbsp; Обо мне</p>
+        <h2 class="h2 reveal" data-i18n="about.title">Более двадцати лет в архитектуре и&nbsp;дизайне интерьеров.</h2>
+        <p class="about__text reveal" data-i18n="about.text">Создаю функциональные, спокойные и точные пространства. От первой планировки до полного комплекта рабочей документации.</p>
       </div>
       <dl class="facts">
-        <div class="fact reveal"><dt>20+</dt><dd>лет практики</dd></div>
-        <div class="fact reveal"><dt>B2C</dt><dd>частные клиенты</dd></div>
-        <div class="fact reveal"><dt>B2B</dt><dd>дизайнеры и студии</dd></div>
+        <div class="fact reveal"><dt>20+</dt><dd data-i18n="about.years">лет практики</dd></div>
+        <div class="fact reveal"><dt>B2C</dt><dd data-i18n="about.b2c">частные клиенты</dd></div>
+        <div class="fact reveal"><dt>B2B</dt><dd data-i18n="about.b2b">дизайнеры и студии</dd></div>
       </dl>
     </section>
 
@@ -184,11 +184,11 @@
         </div>
       </div>
       <div class="section-head">
-        <p class="section-num reveal">03 &nbsp;/&nbsp; Направления</p>
-        <h2 id="work-title" class="h2 reveal">Что я делаю</h2>
+        <p class="section-num reveal" data-i18n="work.num">03 &nbsp;/&nbsp; Направления</p>
+        <h2 id="work-title" class="h2 reveal" data-i18n="work.title">Что я делаю</h2>
         <div class="scale-bar reveal" aria-hidden="true">
           <span class="scale-bar__ticks"></span>
-          <span class="scale-bar__label">три направления работы</span>
+          <span class="scale-bar__label" data-i18n="work.scale">три направления работы</span>
         </div>
       </div>
 
@@ -207,8 +207,8 @@
             </svg>
           </div>
           <span class="tile__label" aria-hidden="true">М 1:50</span>
-          <h3 class="tile__title">Планировки <span class="tile__go" aria-hidden="true">&rarr;</span></h3>
-          <p class="tile__text">Эргономика и сценарии жизни, собранные в ясный план.</p>
+          <h3 class="tile__title" data-i18n="tile.plan.title">Планировки <span class="tile__go" aria-hidden="true">&rarr;</span></h3>
+          <p class="tile__text" data-i18n="tile.plan.text">Эргономика и сценарии жизни, собранные в ясный план.</p>
         </a>
 
         <a class="tile reveal" href="#portfolio" data-filter="viz">
@@ -223,8 +223,8 @@
             </svg>
           </div>
           <span class="tile__label" aria-hidden="true">3D</span>
-          <h3 class="tile__title">Визуализации <span class="tile__go" aria-hidden="true">&rarr;</span></h3>
-          <p class="tile__text">Фотореалистичные 3D-сцены: свет, материалы, атмосфера.</p>
+          <h3 class="tile__title" data-i18n="tile.viz.title">Визуализации <span class="tile__go" aria-hidden="true">&rarr;</span></h3>
+          <p class="tile__text" data-i18n="tile.viz.text">Фотореалистичные 3D-сцены: свет, материалы, атмосфера.</p>
         </a>
 
         <a class="tile reveal" href="#portfolio" data-filter="draw">
@@ -241,8 +241,8 @@
             </svg>
           </div>
           <span class="tile__label" aria-hidden="true">М 1:20</span>
-          <h3 class="tile__title">Рабочие чертежи <span class="tile__go" aria-hidden="true">&rarr;</span></h3>
-          <p class="tile__text">Полный комплект документации для точной реализации.</p>
+          <h3 class="tile__title" data-i18n="tile.draw.title">Рабочие чертежи <span class="tile__go" aria-hidden="true">&rarr;</span></h3>
+          <p class="tile__text" data-i18n="tile.draw.text">Полный комплект документации для точной реализации.</p>
         </a>
       </div>
     </section>
@@ -250,38 +250,38 @@
     <!-- PORTFOLIO -->
     <section id="portfolio" class="portfolio wrap" aria-labelledby="portfolio-title" data-section="04">
       <div class="section-head portfolio__head">
-        <p class="section-num reveal">04 &nbsp;/&nbsp; Портфолио</p>
-        <h2 id="portfolio-title" class="h2 reveal">Избранные работы</h2>
+        <p class="section-num reveal" data-i18n="portfolio.num">04 &nbsp;/&nbsp; Портфолио</p>
+        <h2 id="portfolio-title" class="h2 reveal" data-i18n="portfolio.title">Избранные работы</h2>
         <div class="scale-bar reveal" aria-hidden="true">
           <span class="scale-bar__ticks"></span>
-          <span class="scale-bar__label">фото, видео, чертежи</span>
+          <span class="scale-bar__label" data-i18n="portfolio.scale">фото, видео, чертежи</span>
         </div>
       </div>
 
       <div class="p-sections reveal" role="tablist" aria-label="Направления">
         <button type="button" class="p-section is-active" role="tab" aria-selected="true" data-dir="residential">
           <span class="p-section__num">01</span>
-          <span class="p-section__title">Жилые интерьеры</span>
+          <span class="p-section__title" data-i18n="dir.residential">Жилые интерьеры</span>
           <span class="p-section__count"></span>
         </button>
         <button type="button" class="p-section" role="tab" aria-selected="false" data-dir="commercial">
           <span class="p-section__num">02</span>
-          <span class="p-section__title">Коммерческий дизайн</span>
+          <span class="p-section__title" data-i18n="dir.commercial">Коммерческий дизайн</span>
           <span class="p-section__count"></span>
         </button>
         <button type="button" class="p-section" role="tab" aria-selected="false" data-dir="architecture">
           <span class="p-section__num">03</span>
-          <span class="p-section__title">Архитектура</span>
+          <span class="p-section__title" data-i18n="dir.architecture">Архитектура</span>
           <span class="p-section__count"></span>
         </button>
       </div>
 
       <div class="filters reveal" role="group" aria-label="Тип работ">
-        <button type="button" class="filter is-active" data-filter="all" aria-pressed="true">Все <sup></sup></button>
-        <button type="button" class="filter" data-filter="viz" aria-pressed="false">Визуализации <sup></sup></button>
-        <button type="button" class="filter" data-filter="video" aria-pressed="false">Видео <sup></sup></button>
-        <button type="button" class="filter" data-filter="plan" aria-pressed="false">Планировки <sup></sup></button>
-        <button type="button" class="filter" data-filter="draw" aria-pressed="false">Чертежи <sup></sup></button>
+        <button type="button" class="filter is-active" data-filter="all" aria-pressed="true"><span data-i18n="filter.all">Все</span> <sup></sup></button>
+        <button type="button" class="filter" data-filter="viz" aria-pressed="false"><span data-i18n="filter.viz">Визуализации</span> <sup></sup></button>
+        <button type="button" class="filter" data-filter="video" aria-pressed="false"><span data-i18n="filter.video">Видео</span> <sup></sup></button>
+        <button type="button" class="filter" data-filter="plan" aria-pressed="false"><span data-i18n="filter.plan">Планировки</span> <sup></sup></button>
+        <button type="button" class="filter" data-filter="draw" aria-pressed="false"><span data-i18n="filter.draw">Чертежи</span> <sup></sup></button>
       </div>
 
 
@@ -310,23 +310,23 @@
         <svg viewBox="0 0 120 120" aria-hidden="true">
           <path d="M20 100V60a40 40 0 0 1 80 0v40"/><path d="M10 100h100"/><circle cx="92" cy="26" r="9"/>
         </svg>
-        <p class="gallery__empty-title">Скоро здесь появятся работы</p>
-        <p class="gallery__empty-text">Раздел наполняется. Посмотрите другие направления или напишите мне, чтобы обсудить проект.</p>
+        <p class="gallery__empty-title" data-i18n="empty.title">Скоро здесь появятся работы</p>
+        <p class="gallery__empty-text" data-i18n="empty.text">Раздел наполняется. Посмотрите другие направления или напишите мне, чтобы обсудить проект.</p>
       </div>
 
       <div class="gallery__more">
-        <button type="button" class="btn" id="gallery-more">Показать ещё</button>
+        <button type="button" class="btn" id="gallery-more" data-i18n="gallery.more">Показать ещё</button>
       </div>
     </section>
 
     <!-- SERVICES -->
     <section id="services" class="services wrap bleed" aria-labelledby="services-title" data-section="05">
       <div class="section-head">
-        <p class="section-num reveal">05 &nbsp;/&nbsp; Форматы работы</p>
-        <h2 id="services-title" class="h2 reveal">Услуги</h2>
+        <p class="section-num reveal" data-i18n="services.num">05 &nbsp;/&nbsp; Форматы работы</p>
+        <h2 id="services-title" class="h2 reveal" data-i18n="services.title">Услуги</h2>
         <div class="scale-bar reveal" aria-hidden="true">
           <span class="scale-bar__ticks"></span>
-          <span class="scale-bar__label">B2C и B2B</span>
+          <span class="scale-bar__label" data-i18n="services.scale">B2C и B2B</span>
         </div>
       </div>
 
@@ -360,7 +360,7 @@
             <circle class="sa-tip" cx="310" cy="222" r="9"/>
             <path class="sa-tick" d="M80 372v-12M130 372v-6M180 372v-12M230 372v-6M280 372v-12"/>
           </svg>
-          <p class="service-art__caption">От идеи до чертежа</p>
+          <p class="service-art__caption" data-i18n="services.art">От идеи до чертежа</p>
         </div>
 
         <article class="service reveal">
@@ -368,8 +368,8 @@
             <path d="M8 22L24 8l16 14v18H8z"/><rect x="20" y="28" width="8" height="12"/>
           </svg>
           <p class="service__tag">B2C</p>
-          <h3 class="service__title">Для частных клиентов</h3>
-          <p class="service__text">Интерьеры квартир и домов: планировка, концепция, визуализации и рабочие чертежи.</p>
+          <h3 class="service__title" data-i18n="b2c.title">Для частных клиентов</h3>
+          <p class="service__text" data-i18n="b2c.text">Интерьеры квартир и домов: планировка, концепция, визуализации и рабочие чертежи.</p>
         </article>
 
         <article class="service reveal">
@@ -377,8 +377,8 @@
             <rect x="6" y="14" width="22" height="26"/><rect x="20" y="8" width="22" height="26"/>
           </svg>
           <p class="service__tag">B2B</p>
-          <h3 class="service__title">Для дизайнеров и студий</h3>
-          <p class="service__text">Графика, 3D-эскизы, визуализации и документация по вашему ТЗ. Сроки и конфиденциальность.</p>
+          <h3 class="service__title" data-i18n="b2b.title">Для дизайнеров и студий</h3>
+          <p class="service__text" data-i18n="b2b.text">Графика, 3D-эскизы, визуализации и документация по вашему ТЗ. Сроки и конфиденциальность.</p>
         </article>
       </div>
     </section>
@@ -387,37 +387,37 @@
     <!-- PROCESS -->
     <section id="process" class="process wrap" aria-labelledby="process-title" data-section="06">
       <div class="section-head">
-        <p class="section-num reveal">06 &nbsp;/&nbsp; Этапы</p>
-        <h2 id="process-title" class="h2 reveal">Как я работаю</h2>
+        <p class="section-num reveal" data-i18n="process.num">06 &nbsp;/&nbsp; Этапы</p>
+        <h2 id="process-title" class="h2 reveal" data-i18n="process.title">Как я работаю</h2>
         <div class="scale-bar reveal" aria-hidden="true">
           <span class="scale-bar__ticks"></span>
-          <span class="scale-bar__label">от задачи до чертежей</span>
+          <span class="scale-bar__label" data-i18n="process.scale">от задачи до чертежей</span>
         </div>
       </div>
 
       <ol class="steps">
         <li class="step reveal">
           <span class="step__num">01</span>
-          <h3 class="step__title">Задача и обмеры</h3>
+          <h3 class="step__title" data-i18n="step1.title">Задача и обмеры</h3>
           <p class="step__text">Обсуждаем сценарии жизни, сроки и бюджет, фиксируем техническое задание и исходные размеры помещения.</p>
         </li>
         <li class="step reveal">
           <span class="step__num">02</span>
-          <h3 class="step__title">Планировка</h3>
+          <h3 class="step__title" data-i18n="step2.title">Планировка</h3>
           <p class="step__text">Несколько вариантов планировочных решений: зонирование, хранение, эргономика. Выбираем и дорабатываем один.</p>
-          <a class="step__link" href="#portfolio" data-filter="plan">Смотреть планировки <span aria-hidden="true">&rarr;</span></a>
+          <a class="step__link" href="#portfolio" data-filter="plan" data-i18n="step2.link">Смотреть планировки <span aria-hidden="true">&rarr;</span></a>
         </li>
         <li class="step reveal">
           <span class="step__num">03</span>
-          <h3 class="step__title">Визуализация</h3>
+          <h3 class="step__title" data-i18n="step3.title">Визуализация</h3>
           <p class="step__text">3D-сцены со светом, материалами и мебелью. Вы видите будущий интерьер до начала ремонта и вносите правки.</p>
-          <a class="step__link" href="#portfolio" data-filter="viz">Смотреть визуализации <span aria-hidden="true">&rarr;</span></a>
+          <a class="step__link" href="#portfolio" data-filter="viz" data-i18n="step3.link">Смотреть визуализации <span aria-hidden="true">&rarr;</span></a>
         </li>
         <li class="step reveal">
           <span class="step__num">04</span>
-          <h3 class="step__title">Рабочие чертежи</h3>
+          <h3 class="step__title" data-i18n="step4.title">Рабочие чертежи</h3>
           <p class="step__text">Полный комплект документации: планы полов, потолков, розеток и освещения, развёртки, ведомости материалов.</p>
-          <a class="step__link" href="#portfolio" data-filter="draw">Смотреть чертежи <span aria-hidden="true">&rarr;</span></a>
+          <a class="step__link" href="#portfolio" data-filter="draw" data-i18n="step4.link">Смотреть чертежи <span aria-hidden="true">&rarr;</span></a>
         </li>
       </ol>
     </section>
@@ -430,20 +430,20 @@
           <circle cx="200" cy="200" r="36"/>
         </svg>
 
-        <p class="section-num reveal">07 &nbsp;/&nbsp; Контакты</p>
-        <h2 id="contact-title" class="contact__title reveal">Расскажите<br>о своём <em>пространстве</em></h2>
+        <p class="section-num reveal" data-i18n="contact.num">07 &nbsp;/&nbsp; Контакты</p>
+        <h2 id="contact-title" class="contact__title reveal" data-i18n="contact.title">Расскажите<br>о своём <em>пространстве</em></h2>
 
         <ul class="contact__list">
           <li class="reveal"><span>WhatsApp</span><b class="contact__plain">@ollline.interiors</b></li>
           <li class="reveal"><span>Instagram</span><a href="https://instagram.com/ollline.interiors" target="_blank" rel="noopener">@ollline.interiors</a></li>
-          <li class="reveal"><span>Почта</span><a href="mailto:ollline.design@gmail.com">ollline.design@gmail.com</a></li>
+          <li class="reveal"><span data-i18n="contact.mail">Почта</span><a href="mailto:ollline.design@gmail.com">ollline.design@gmail.com</a></li>
         </ul>
 
         <div class="stamp reveal" aria-hidden="true">
-          <div class="stamp__row"><span>Проект</span><b>Olline.design</b></div>
-          <div class="stamp__row"><span>Автор</span><b>Olga Lavreka</b></div>
-          <div class="stamp__row"><span>Раздел</span><b>Архитектура · Интерьер · 3D</b></div>
-          <div class="stamp__row"><span>Стадия</span><b>Р · 2026</b></div>
+          <div class="stamp__row"><span data-i18n="stamp.project">Проект</span><b>Olline.design</b></div>
+          <div class="stamp__row"><span data-i18n="stamp.author">Автор</span><b>Olga Lavreka</b></div>
+          <div class="stamp__row"><span data-i18n="stamp.scope">Раздел</span><b data-i18n="stamp.scopeValue">Архитектура · Интерьер · 3D</b></div>
+          <div class="stamp__row"><span data-i18n="stamp.stage">Стадия</span><b data-i18n="stamp.stageValue">Р · 2026</b></div>
         </div>
       </div>
     </section>
@@ -452,8 +452,8 @@
   <footer class="footer">
     <div class="wrap footer__inner">
       <span>&copy; <span id="year">2026</span> Olline.design</span>
-      <span class="footer__sheet">Лист 01 / 01</span>
-      <span>Архитектура &middot; Интерьер &middot; 3D</span>
+      <span class="footer__sheet" data-i18n="footer.sheet">Лист 01 / 01</span>
+      <span data-i18n="footer.tags">Архитектура &middot; Интерьер &middot; 3D</span>
     </div>
   </footer>
 
@@ -513,8 +513,9 @@
   }
   </script>
 
-  <script src="media/manifest.js?v=35"></script>
-  <script src="script.js?v=35"></script>
-  <script src="gallery.js?v=35"></script>
+  <script src="i18n.js?v=36"></script>
+  <script src="media/manifest.js?v=36"></script>
+  <script src="script.js?v=36"></script>
+  <script src="gallery.js?v=36"></script>
 </body>
 </html>

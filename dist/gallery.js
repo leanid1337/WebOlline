@@ -11,7 +11,10 @@ const weak = (navigator.hardwareConcurrency || 4) <= 4;
 const MAX_PLAYING = savesData || coarse ? 0 : weak ? 1 : 2;
 const PAGE = coarse ? 8 : 12;
 const TYPES = ["viz", "video", "plan", "draw"];
-const labels = { viz: "Визуализация", video: "Видео", plan: "Планировка", draw: "Рабочий чертёж" };
+
+const i18n = window.OLLINE_I18N;
+const label = (kind) => (i18n ? i18n.t("g." + kind) : kind);
+const dirTitle = (key, fallback) => (i18n ? i18n.t("dir." + key) : fallback);
 
 const FEATURED = {
 commercial: ["bel-001", "chatgpt-image-11-iyul-2025-g-15-37-24", "chatgpt-image-12-iyul-2025-g-09-16-49",
@@ -58,17 +61,17 @@ const filterBtns = document.querySelectorAll(".filter");
 const moreWrap = document.querySelector(".gallery__more");
 const moreBtn = document.getElementById("gallery-more");
 const empty = document.getElementById("gallery-empty");
-const plural = (n) => {
-const m10 = n % 10, m100 = n % 100;
-if (m10 === 1 && m100 !== 11) return "работа";
-if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return "работы";
-return "работ";
+const countLabel = (n) => {
+if (!n) return i18n ? i18n.t("g.soon") : "скоро";
+return `${n} ${i18n ? i18n.plural(n) : ""}`.trim();
 };
+const syncCounts = () => {
 sectionBtns.forEach((b) => {
 const s = sections[b.dataset.dir];
-const n = s ? s.items.all.length : 0;
-b.querySelector(".p-section__count").textContent = n ? `${n} ${plural(n)}` : "скоро";
+b.querySelector(".p-section__count").textContent = countLabel(s ? s.items.all.length : 0);
 });
+};
+syncCounts();
 const list = () => (sections[section] ? sections[section].items[type] : []);
 
 const visible = new Set();
@@ -137,8 +140,9 @@ btn.dataset.index = index;
 btn.dataset.w = it.w;
 btn.dataset.h = it.h;
 btn.style.setProperty("--d", `${delay}ms`);
-const label = `${labels[it.kind]}, ${sections[section].title}, ${index + 1}`;
-btn.setAttribute("aria-label", `${label}. Открыть`);
+const title = dirTitle(section, sections[section].title);
+const caption = `${label(it.kind)}, ${title}, ${index + 1}`;
+btn.setAttribute("aria-label", `${caption}. ${i18n ? i18n.t("g.open") : ""}`.trim());
 const sheet = `<span class="g-num" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>`;
 if (it.kind === "video") {
 
@@ -150,7 +154,7 @@ if (videoIO) videoIO.observe(btn.querySelector("video"));
 const srcset = it.small
 ? ` srcset="${it.small} 420w, ${it.thumb} ${it.w}w" sizes="(max-width: 520px) 92vw, (max-width: 960px) 46vw, 31vw"`
 : "";
-btn.innerHTML = `${sheet}<span class="g-frame"><img src="${it.thumb}"${srcset} alt="${label}" width="${it.w}" height="${it.h}" loading="lazy" decoding="async"></span>`;
+btn.innerHTML = `${sheet}<span class="g-frame"><img src="${it.thumb}"${srcset} alt="${caption}" width="${it.w}" height="${it.h}" loading="lazy" decoding="async"></span>`;
 }
 return btn;
 };
@@ -219,6 +223,14 @@ render(false);
 }));
 render(false);
 
+document.addEventListener("olline:lang", () => {
+syncCounts();
+const shownNow = shown;
+shown = 0;
+gallery.innerHTML = "";
+while (shown < shownNow && shown < list().length) renderMore();
+});
+
 const dialog = document.getElementById("lightbox");
 const stage = document.getElementById("lightbox-stage");
 const count = document.getElementById("lightbox-count");
@@ -238,7 +250,7 @@ if (it.kind === "video") {
 stage.innerHTML = `<video class="lightbox__media" src="${it.src}" poster="${it.poster}" controls autoplay muted loop playsinline></video>`;
 } else {
 const placeholder = coarse && it.small ? it.small : it.src;
-stage.innerHTML = `<img class="lightbox__media" src="${placeholder}" alt="${labels[it.kind]}, ${sections[section].title}" width="${it.fw}" height="${it.fh}">`;
+stage.innerHTML = `<img class="lightbox__media" src="${placeholder}" alt="${label(it.kind)}, ${dirTitle(section, sections[section].title)}" width="${it.fw}" height="${it.fh}">`;
 if (placeholder !== it.src) {
 const full = new Image();
 full.onload = () => { const el = stage.querySelector("img"); if (el) el.src = it.src; };
@@ -248,7 +260,7 @@ full.src = it.src;
 if (n && n.kind !== "video") new Image().src = n.src;
 });
 }
-count.textContent = `${sections[section].title} · ${lbIndex + 1} / ${items.length}`;
+count.textContent = `${dirTitle(section, sections[section].title)} · ${lbIndex + 1} / ${items.length}`;
 };
 
 
